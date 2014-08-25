@@ -365,6 +365,14 @@ class AddressTestCase_v6(BaseTestCase, CommonTestMixin_v6):
         assertBadAddressPart(u"3ffe::1.1.1.net",
                              "Only decimal digits permitted in u?'net' "
                              "in u?'1.1.1.net'")
+        assertBadAddressPart(u"::1.0.0.00",
+                             "u?'00' has leading zeroes, which could be "
+                             "interpreted as an octal number, but only "
+                             "decimal numbers are permitted in u?'1.0.0.00'")
+        assertBadAddressPart(u"::1.0.0.000",
+                             "u?'000' has leading zeroes, which could be "
+                             "interpreted as an octal number, but only "
+                             "decimal numbers are permitted in u?'1.0.0.000'")
 
     def test_invalid_characters(self):
         def assertBadPart(addr, part):
